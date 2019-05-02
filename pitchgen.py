@@ -8,7 +8,7 @@ NOTES=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
 EQUIVILANTS={"Db":"C#", "Eb":"D#", "Gb":"F#", "Ab":"G#", "Bb":"A#"}
 
 class PitchGenerator:
-    def __init__(self,duration=5.0,standard=440.0):
+    def __init__(self,duration=5.0,standard=440):
         self.duration=duration
         self.standard=standard
 
@@ -25,7 +25,9 @@ class PitchGenerator:
 
     def generateWAV(self,note="A"):
         frequency=self.pitchToFrequency(note)
-        wavef = wave.open(note + ".wav", "w")
+        print("Generating note with frequency {}".format(frequency))
+        filename="{}4({}).wav".format(note,self.standard)
+        wavef = wave.open(filename, "w")
         wavef.setnchannels(CHANNELS)
         wavef.setsampwidth(SAMPLE_WIDTH) 
         wavef.setframerate(SAMPLE_RATE)
@@ -34,3 +36,4 @@ class PitchGenerator:
             data = struct.pack('<h', value)
             wavef.writeframesraw(data)
         wavef.close()
+        print("Saved note to {}".format(filename))
