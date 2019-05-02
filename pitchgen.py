@@ -1,4 +1,5 @@
 import wave, struct, math
+import pygame
 
 SAMPLE_RATE = 44100.0
 CHANNELS = 1 #mono
@@ -37,3 +38,7 @@ class PitchGenerator:
             wavef.writeframesraw(data)
         wavef.close()
         print("Saved note to {}".format(filename))
+        print("Playing note ...")
+        pygame.mixer.init()
+        pygame.mixer.music.load(filename)
+        pygame.mixer.music.play()
