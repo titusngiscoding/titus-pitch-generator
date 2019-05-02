@@ -27,7 +27,7 @@ class PitchGenerator:
         return self.standard*(2**(1/12))**(steps)
 
     def playNote(self,filename):
-        print("Playing {} ...",filename)
+        print("Playing {} ...".format(filename))
         mixer.init()
         mixer.music.load(filename)
         mixer.music.play()
