@@ -3,7 +3,7 @@ from pitchgen import PitchGenerator
 MUSIC_NOTES=["C","C#","Db","D","D#","Eb","E","F","F#","Gb","G","G#","Ab","A","A#","Bb","B"]
 def main():
     print("titus-pitch-generator 1.0")
-    print("List of notes available: {}".format(MUSIC_NOTES))
+    print("Notes available: {}".format(MUSIC_NOTES))
     note = input("Enter note: ")
     pg = PitchGenerator()
     filename = pg.generateWAV(note)
