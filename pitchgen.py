@@ -48,3 +48,9 @@ class PitchGenerator:
         wavef.close()
         print("Saved note to {}".format(filename))
         return filename
+
+    def sanitizeInput(self,text):
+        response = None
+        while response not in NOTES:
+            response = input(text)
+        return response

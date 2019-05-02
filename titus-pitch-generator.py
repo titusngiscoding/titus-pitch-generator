@@ -4,8 +4,8 @@ MUSIC_NOTES=["C","C#","Db","D","D#","Eb","E","F","F#","Gb","G","G#","Ab","A","A#
 def main():
     print("titus-pitch-generator 1.0")
     print("Notes available: {}".format(MUSIC_NOTES))
-    note = input("Enter note: ")
     pg = PitchGenerator()
+    note = pg.sanitizeInput("Please enter a Note: ")
     filename = pg.generateWAV(note)
     pg.playNote(filename)
     input("Press Enter to exit ...")
