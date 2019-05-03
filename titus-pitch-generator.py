@@ -1,7 +1,8 @@
-from os import environ
-from time import sleep
-environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-from pygame import mixer
+import os
+import time
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+import pygame
+
 from validation import sanitizeInput, caseInsensitiveIn, caseInsensitiveIndex
 from pitch_generator import PitchGenerator
 
@@ -20,12 +21,12 @@ def getIsTryAgain():
 
 
 def playNote(filepath):
-    mixer.init()
-    player = mixer.Sound(filepath)
+    pygame.mixer.init()
+    player = pygame.mixer.Sound(filepath)
     length = player.get_length()
     print("Playing {} ...".format(filepath))
     player.play()
-    sleep(length)
+    time.sleep(length)
 
 
 def main():
