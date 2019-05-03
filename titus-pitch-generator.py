@@ -1,6 +1,6 @@
-import os
-import time
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+from os import environ
+from time import sleep
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 from pygame import mixer
 from validation import sanitizeInput, caseInsensitiveIn, caseInsensitiveIndex
 from pitch_generator import PitchGenerator
