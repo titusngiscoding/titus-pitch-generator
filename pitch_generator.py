@@ -11,29 +11,34 @@ class PitchGenerator:
     def __init__(self,duration=5,standard=440):
         self.duration=duration
         self.standard=standard
+        print("Asserting A4 = {} hz".format(self.standard))
 
-    def flatToSharp(self,note="A"):
+    def flatToSharp(self,note):
         if note in EQUILVALENTS:
             return EQUILVALENTS[note]
         else:
             return note
 
-    def pitchToFrequency(self,note="A"):
+    def pitchToFrequency(self,note):
         note=self.flatToSharp(note)
         steps=NOTES.index(note)-NOTES.index("A")
         return self.standard*(2**(1/12))**(steps)
 
     def generateWAV(self,note,filename):
-        frequency=self.pitchToFrequency(note)
-        print("Generating {} seconds of {}4 = {} hz ...".format(self.duration,note,frequency))
-        wavef = wave.open(filename, "w")
-        wavef.setnchannels(CHANNELS)
-        wavef.setsampwidth(SAMPLE_WIDTH) 
-        wavef.setframerate(SAMPLE_RATE)
-        for i in range(int(self.duration * SAMPLE_RATE)):
-            value = int(VOLUME*math.sin(frequency*SAMPLE_WIDTH*math.pi*float(i)/float(SAMPLE_RATE)))
-            data = struct.pack('<h', value)
-            wavef.writeframesraw(data)
-        wavef.close()
-        print("Saved note to {}".format(filename))
-        return filename
+        if not os.path.exists("cache/"):
+            os.mkdir("cache")
+        filepath="cache/{}".format(filename)
+        if not os.path.exists("filepath"):
+            frequency=self.pitchToFrequency(note)
+            print("Generating {} seconds of {}4 : {} hz ...".format(self.duration,note,frequency))
+            wavef = wave.open(filepath, "w")
+            wavef.setnchannels(CHANNELS)
+            wavef.setsampwidth(SAMPLE_WIDTH) 
+            wavef.setframerate(SAMPLE_RATE)
+            for i in range(int(self.duration * SAMPLE_RATE)):
+                value = int(VOLUME*math.sin(frequency*SAMPLE_WIDTH*math.pi*float(i)/float(SAMPLE_RATE)))
+                data = struct.pack('<h', value)
+                wavef.writeframesraw(data)
+            wavef.close()
+            print("Saved note to {}".format(filepath))
+        return filepath

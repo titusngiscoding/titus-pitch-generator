@@ -5,11 +5,14 @@ from pitch_generator import PitchGenerator
 
 MUSIC_NOTES=["C","C#","Db","D","D#","Eb","E","F","F#","Gb","G","G#","Ab","A","A#","Bb","B"]
 
-def playNote(filename):
+def generateFilename(note,standard):
+    return "{}4({}).wav".format(note,standard)
+
+def playNote(filepath):
     mixer.init()
-    player = mixer.Sound(filename)
+    player = mixer.Sound(filepath)
     length = player.get_length()
-    print("Playing {} ...".format(filename))
+    print("Playing {} ...".format(filepath))
     player.play()
     time.sleep(length)
 
@@ -23,19 +26,17 @@ def getIsTryAgain():
 
 def main():
     print("titus-pitch-generator 1.0")
+    standard=int(input("Please enter standard: "))
+    pg=PitchGenerator(standard=standard)
     print("Notes available: {}".format(MUSIC_NOTES))
+    print()
     again=True
     while again:
-        print()
         note = input("Please enter note: ")
-        standard=440
-        print("Asserting A4 = 440 hz")
-        filename="cache/{}4({}).wav".format(note,standard)
-        if not os.path.exists(filename):
-            pg = PitchGenerator(standard=standard)
-            pg.generateWAV(note,filename)
-        playNote(filename)
+        filepath = pg.generateWAV(note,generateFilename(note,standard))
+        playNote(filepath)
         again=getIsTryAgain()
+        print()
     input("Press Enter to exit ...")
     
 if __name__ == "__main__":
