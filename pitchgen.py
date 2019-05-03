@@ -49,8 +49,8 @@ class PitchGenerator:
         print("Saved note to {}".format(filename))
         return filename
 
-    def sanitizeInput(self,text):
+    def sanitizeInput(self,valid_notes,text):
         response = None
-        while response not in NOTES:
+        while response not in valid_notes:
             response = input(text)
         return response
