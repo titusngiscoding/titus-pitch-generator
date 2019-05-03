@@ -25,7 +25,7 @@ def playNote(filepath):
 
 def main():
     print("titus-pitch-generator 1.0")
-    standard=int(sanitizeInput([str(x) for x in range(400, 500)],"Please enter standard: "))
+    standard=int(sanitizeInput([str(x) for x in range(400, 500)],"Please enter standard (e.g. 440, 432): "))
     pg=PitchGenerator(standard=standard)
     print("Notes available: {}".format(MUSIC_NOTES))
     print()
