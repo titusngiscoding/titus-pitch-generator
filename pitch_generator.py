@@ -1,4 +1,4 @@
-import wave, struct, math, time, os
+import wave, struct, math, os
 
 SAMPLE_RATE = 44100.0
 CHANNELS = 1 #mono
