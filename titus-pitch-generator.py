@@ -25,7 +25,7 @@ def playNote(filepath):
     length = player.get_length()
     print("Playing {} ...".format(filepath))
     player.play()
-    time.sleep(length)
+    sleep(length)
 
 
 def main():
