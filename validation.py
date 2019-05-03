@@ -1,6 +1,6 @@
 def sanitizeInput(valid_responses, text):
-    response = ""
-    while response.lower() not in [x.lower() for x in valid_responses]:
+    response = None
+    while response is None or response.lower() not in [x.lower() for x in valid_responses]:
         response = input(text)
     return response
 
