@@ -28,7 +28,7 @@ class PitchGenerator:
         if not os.path.exists("cache/"):
             os.mkdir("cache")
         filepath="cache/{}".format(filename)
-        if not os.path.exists("filepath"):
+        if not os.path.exists(filepath):
             frequency=self.pitchToFrequency(note)
             print("Generating {} seconds of {}4 : {} hz ...".format(self.duration,note,frequency))
             wavef = wave.open(filepath, "w")
