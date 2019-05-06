@@ -9,14 +9,15 @@ from pitch_generator import PitchGenerator
 MUSIC_NOTES = ["C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "B"]
 YES_RESPONSES = ["y", "yes"]
 NO_RESPONSES = ["n", "no"]
+DEFAULT_STANDARD=440
 
 
 def generateFilename(note, standard):
     return "{}4({}).wav".format(note, standard)
 
 
-def getIsTryAgain():
-    tryagain = sanitizeInput(YES_RESPONSES + NO_RESPONSES, "One more time? (y/n): ")
+def getYesNo(input_msg):
+    tryagain = sanitizeInput(YES_RESPONSES + NO_RESPONSES, input_msg)
     return caseInsensitiveIn(tryagain, YES_RESPONSES)
 
 
@@ -31,7 +32,10 @@ def playNote(filepath):
 
 def main():
     print("titus-pitch-generator 1.0")
-    standard = int(sanitizeInput([str(x) for x in range(400, 500)], "Please enter standard (e.g. 440, 432): "))
+    standard=DEFAULT_STANDARD
+    use_default=getYesNo("Do you wish to use default standard: A4 = 440 hz? (y/n): ")
+    if(not use_default):
+        standard = int(sanitizeInput([str(x) for x in range(400, 500)], "Please enter standard (e.g. 432): "))
     pg = PitchGenerator(standard=standard)
     print("Notes available: {}".format(MUSIC_NOTES))
     print()
@@ -41,7 +45,7 @@ def main():
         note = MUSIC_NOTES[caseInsensitiveIndex(note, MUSIC_NOTES)]
         filepath = pg.generateWAV(note, generateFilename(note, standard))
         playNote(filepath)
-        again = getIsTryAgain()
+        again = getYesNo("One more time? (y/n): ")
         print()
     input("Press Enter to exit ...")
 
