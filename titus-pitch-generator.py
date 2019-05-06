@@ -9,7 +9,7 @@ from pitch_generator import PitchGenerator
 MUSIC_NOTES = ["C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "B"]
 YES_RESPONSES = ["y", "yes"]
 NO_RESPONSES = ["n", "no"]
-DEFAULT_STANDARD=440
+DEFAULT_STANDARD = 440
 
 
 def generateFilename(note, standard):
@@ -32,8 +32,8 @@ def playNote(filepath):
 
 def main():
     print("titus-pitch-generator 1.0")
-    standard=DEFAULT_STANDARD
-    use_default=getYesNo("Do you wish to use default standard: A4 = 440 hz? (y/n): ")
+    standard = DEFAULT_STANDARD
+    use_default = getYesNo("Do you wish to use default standard: A4 = 440 hz? (y/n): ")
     if(not use_default):
         standard = int(sanitizeInput([str(x) for x in range(400, 500)], "Please enter standard (e.g. 432): "))
     pg = PitchGenerator(standard=standard)
