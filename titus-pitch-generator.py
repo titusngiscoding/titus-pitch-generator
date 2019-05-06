@@ -17,8 +17,8 @@ def generateFilename(note, standard):
 
 
 def getYesNo(input_msg):
-    tryagain = sanitizeInput(YES_RESPONSES + NO_RESPONSES, input_msg)
-    return caseInsensitiveIn(tryagain, YES_RESPONSES)
+    ans = sanitizeInput(YES_RESPONSES + NO_RESPONSES, input_msg)
+    return caseInsensitiveIn(ans, YES_RESPONSES)
 
 
 def playNote(filepath):
